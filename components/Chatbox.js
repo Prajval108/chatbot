@@ -1,7 +1,7 @@
 // Chatbox.js
 import { useRef, useState } from 'react';
 import { Input, Button, InputGroup, InputRightElement, Center, Box, Text, Tab, TabList, Tabs, Heading } from '@chakra-ui/react';
-import { PhoneIcon, AddIcon, WarningIcon, AttachmentIcon } from '@chakra-ui/icons'
+import { AttachmentIcon } from '@chakra-ui/icons'
 import axios from 'axios';
 import ChatMessage from './ChatMessage';
 
@@ -33,7 +33,7 @@ const Chatbox = () => {
       const formData = new FormData();
       formData.append('question', inputText);
       // let answer;
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/ask_question`, formData).then(async (res) => {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/t5_large/ask_question`, formData).then(async (res) => {
         if (res?.data?.errorCode == 0) {
           answer = res?.data?.data;
           console.log("dasta", answer)
@@ -57,7 +57,7 @@ const Chatbox = () => {
     try {
       const formData = new FormData();
       formData.append('file_url', docs);
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/load_model_with_url`, formData).then(async (res) => {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/t5_large/load_model_with_url`, formData).then(async (res) => {
         if (res?.data?.errorCode == 0) {
           console.log("dasta", res?.data)
         } else {
@@ -119,7 +119,7 @@ const Chatbox = () => {
     <>
       <div style={{ marginBottom: '1rem', maxHeight: 'calc(100vh - 120px)', overflowY: 'auto' }}>
         <Heading as="h1" fontSize="25px" mb={4}>
-          Chatbot
+          DocChat
         </Heading>
         <Center>
           <Tabs variant='soft-rounded' colorScheme='green' mb={4}>
@@ -134,8 +134,7 @@ const Chatbox = () => {
         ))}
       </div>
 
-      <div style={{ paddingBottom: '20px', width: '100%' }}>
-        <div style={{ position: 'sticky', bottom: 0 }}>
+      <div style={{ paddingBottom: '20px', width: '100%', position: 'sticky', bottom: 0 }}>
           <Center>
             <InputGroup size='md' width="1000px">
               <Input
@@ -173,8 +172,6 @@ const Chatbox = () => {
             </InputGroup>
           </Center>
         </div>
-      </div>
-
     </>
   );
 };

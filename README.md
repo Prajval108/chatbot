@@ -35,4 +35,3 @@ npm run dev
 ```
 
 The Next.js project should now be running, and you can access it in your web browser at http://localhost:3000/.
-

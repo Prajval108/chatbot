@@ -1,5 +1,5 @@
 // ChatbotPage.js
-import { VStack } from '@chakra-ui/react';
+import { Progress, VStack } from '@chakra-ui/react';
 import Chatbox from '../components/Chatbox';
 import { ChakraProvider } from '@chakra-ui/react'
 
@@ -12,7 +12,7 @@ const ChatbotPage = () => {
         <Chatbox />
       </VStack>
     </ChakraProvider>
-
+            
   );
 };
 
